@@ -27,6 +27,7 @@ class FileTest extends TestCase
         $this->expectException(Exception::class);
 
         $file = new File('bar.txt');
+        $this->assertFalse(empty($file));
     }
 
     /**
