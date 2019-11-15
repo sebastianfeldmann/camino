@@ -116,8 +116,8 @@ class DirectoryTest extends TestCase
      */
     public function testFactoryExists(): void
     {
-        $file = File::create(__FILE__);
-        $this->assertEquals(__FILE__, $file->getPath());
+        $dir = Directory::create(__DIR__);
+        $this->assertEquals(__DIR__, $dir->getPath());
     }
 
     /**
@@ -127,19 +127,19 @@ class DirectoryTest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        $file = File::create('./foo');
-        $this->assertEquals('should-not-be-tested', $file->getPath());
+        $dir = Directory::create('./foo');
+        $this->assertEquals('should-not-be-tested', $dir->getPath());
     }
 
 
     /**
      * Tests Directory::create
      */
-    public function testFactoryIsDirectory(): void
+    public function testFactoryIsFile(): void
     {
         $this->expectException(\Exception::class);
 
-        $file = File::create(__DIR__);
-        $this->assertEquals('should-not-be-tested', $file->getPath());
+        $dir = Directory::create(__FILE__);
+        $this->assertEquals('should-not-be-tested', $dir->getPath());
     }
 }
