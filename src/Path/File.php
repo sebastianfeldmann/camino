@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Camino\Path;
 
+use RuntimeException;
+
 /**
  * Class File
  *
@@ -35,5 +37,20 @@ final class File extends Base
     public function isInDirectory(Directory $directory): bool
     {
         return $this->isChildOf($directory);
+    }
+
+    /**
+     * Factory method to create files that actually exist
+     *
+     * @param  string $path
+     * @return \SebastianFeldmann\Camino\Path\File
+     */
+    public static function create(string $path): File
+    {
+        $realPath = realpath($path);
+        if (empty($realPath) || is_dir($realPath)) {
+            throw new RuntimeException('file does not exist: ' . $path);
+        }
+        return new self($realPath);
     }
 }

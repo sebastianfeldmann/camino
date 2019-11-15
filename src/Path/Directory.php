@@ -9,6 +9,8 @@
  */
 namespace SebastianFeldmann\Camino\Path;
 
+use RuntimeException;
+
 /**
  * Class Directory
  *
@@ -25,5 +27,20 @@ final class Directory extends Base
     public function isSubDirectoryOf(Directory $parent): bool
     {
         return $this->isChildOf($parent);
+    }
+
+    /**
+     * Factory method to create directories that actually exist
+     *
+     * @param  string $path
+     * @return \SebastianFeldmann\Camino\Path\Directory
+     */
+    public static function create(string $path): Directory
+    {
+        $realPath = realpath($path);
+        if (empty($realPath) || is_file($realPath)) {
+            throw new RuntimeException('directory does not exist: ' . $path);
+        }
+        return new self($realPath);
     }
 }
