@@ -85,7 +85,7 @@ class DirectoryTest extends TestCase
     /**
      * Tests Directory::getPathRelativeFrom
      */
-    public function testGetPathRelativeFrom(): void
+    public function testGetRelativePathFrom(): void
     {
         $dir    = new Directory('/foo/bar/baz');
         $parent = new Directory('/foo');
@@ -95,7 +95,7 @@ class DirectoryTest extends TestCase
     /**
      * Tests Directory::getPathRelativeFrom
      */
-    public function testGetPathRelativeFromNoChild(): void
+    public function testGetRelativePathFromNoChild(): void
     {
         $this->expectException(Exception::class);
         $dir = new Directory('/foo/bar/baz');
