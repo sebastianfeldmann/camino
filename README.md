@@ -9,3 +9,23 @@
 
 # Camino
 File system path handling the OO way
+
+## Installation
+
+    composer install sebastianfeldmann/camino
+
+## Usage
+
+```php
+<?php
+
+use SebastianFeldmann\Camino;
+
+$file = Camino\Path\File::create(__FILE__);
+$dir  = Camino\Path\Directory::create(__DIR__);
+
+if ($file->isInDirectory($dir)) {
+    echo 'file is located inside the directory';
+}
+
+```
