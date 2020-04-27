@@ -1,12 +1,14 @@
 name: CI Build
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        php: [7.1, 7.2, 7.3, 7.4]
     steps:
     - uses: actions/checkout@v1
 
@@ -15,12 +17,6 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    
+
     - name: Execute unit tests
       run: vendor/bin/phpunit
-       
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
