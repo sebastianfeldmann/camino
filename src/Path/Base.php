@@ -108,7 +108,8 @@ abstract class Base implements Path
             $path       = substr($path, 2);
         }
 
-        if (substr($path, 0, 1) === '\\') {
+		$slash = substr($path, 0, 1);
+        if ($slash === '\\' || $slash === '/') {
             $this->root = trim($this->root, '/\\') . '/';
             $this->path = trim(str_replace('\\', '/', $path), '/');
             $this->detectSegments($this->path);
