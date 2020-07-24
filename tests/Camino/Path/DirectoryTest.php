@@ -32,10 +32,20 @@ class DirectoryTest extends TestCase
     /**
      * Tests Directory::getPath
      */
-    public function testPathWindows(): void
+    public function testPathWindowsBackslash(): void
     {
         $directory = new Directory('c:\\foo\\bar\\baz');
         $this->assertEquals('c:\\foo\\bar\\baz', $directory->getPath());
+        $this->assertEquals(3, $directory->getDepth());
+    }
+
+    /**
+     * Tests Directory::getPath
+     */
+    public function testPathWindowsSlash(): void
+    {
+        $directory = new Directory('C:/foo/bar/baz');
+        $this->assertEquals('C:/foo/bar/baz', $directory->getPath());
         $this->assertEquals(3, $directory->getDepth());
     }
 

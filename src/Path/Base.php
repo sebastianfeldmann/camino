@@ -80,13 +80,13 @@ abstract class Base implements Path
             return;
         }
 
-        // check windows path
-        if ($this->normalizeWindows($path)) {
+        // check streams
+        if ($this->normalizeStream($path)) {
             return;
         }
 
-        // check streams
-        if ($this->normalizeStream($path)) {
+        // check windows path
+        if ($this->normalizeWindows($path)) {
             return;
         }
 
@@ -108,9 +108,14 @@ abstract class Base implements Path
             $path       = substr($path, 2);
         }
 
+        // normalize \ to /
         if (substr($path, 0, 1) === '\\') {
+            $path = str_replace('\\', '/', $path);
+        }
+
+        if (substr($path, 0, 1) === '/') {
             $this->root = trim($this->root, '/\\') . '/';
-            $this->path = trim(str_replace('\\', '/', $path), '/');
+            $this->path = trim($path, '/');
             $this->detectSegments($this->path);
             return true;
         }
