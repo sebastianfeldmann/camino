@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of Camino.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Camino\Path;
 
 use RuntimeException;
@@ -268,5 +270,3 @@ abstract class Base implements Path
         return $this->raw;
     }
 }
-
-

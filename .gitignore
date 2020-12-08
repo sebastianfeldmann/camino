@@ -4,6 +4,9 @@
 # Ignore MacOS cache files
 .DS_STORE
 
+# ignore tooling installed via phive
+tools
+
 # ignore PHPUnit result cache
 .phpunit.result.cache
 

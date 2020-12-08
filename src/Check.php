@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of camino.
  *
@@ -7,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianFeldmann\Camino;
 
 /**
@@ -22,7 +24,7 @@ abstract class Check
      * @param  string $path
      * @return bool
      */
-    public static function isAbsolutePath(string $path) : bool
+    public static function isAbsolutePath(string $path): bool
     {
         // path already absolute?
         if (substr($path, 0, 1) === '/') {
@@ -63,7 +65,7 @@ abstract class Check
      * @param  string $path
      * @return bool
      */
-    public static function isAbsoluteWindowsPath(string $path) : bool
+    public static function isAbsoluteWindowsPath(string $path): bool
     {
         return ($path[0] === '\\' || (strlen($path) >= 3 && preg_match('#^[A-Z]\:[/\\\]#i', substr($path, 0, 3))));
     }
