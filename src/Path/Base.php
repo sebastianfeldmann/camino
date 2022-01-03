@@ -150,7 +150,21 @@ abstract class Base implements Path
      */
     private function detectSegments(string $path)
     {
-        $this->segments = empty($path) ? [] : explode('/', trim($path, '/'));
+        $segments = empty($path) ? [] : explode('/', trim($path, '/'));
+        $segments = array_filter($segments);
+        $this->segments = [];
+
+        foreach ($segments as $segment) {
+            if ($segment === '.') {
+                continue;
+            }
+            if ($segment === '..') {
+                array_pop($this->segments);
+            } else {
+                $this->segments[] = $segment;
+            }
+        }
+
         $this->depth    = count($this->segments);
     }
 
