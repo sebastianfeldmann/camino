@@ -105,7 +105,7 @@ abstract class Base implements Path
     {
         // check for C:\ or C:/
         $driveMatch = [];
-        if (strlen($path) >= 3 && preg_match('#^([A-Z]\:)[/\\\]#i', substr($path, 0, 3), $driveMatch)) {
+        if (strlen($path) >= 3 && preg_match('#^([A-Z]:)[/\\\]#i', substr($path, 0, 3), $driveMatch)) {
             $this->root = $driveMatch[1];
             $path       = substr($path, 2);
         }
@@ -134,7 +134,7 @@ abstract class Base implements Path
     private function normalizeStream(string $path): bool
     {
         $schemeMatch = [];
-        if (strlen($path) > 4 && preg_match('#^([A-Z]+\://).#i', $path, $schemeMatch)) {
+        if (strlen($path) > 4 && preg_match('#^([A-Z]+://).#i', $path, $schemeMatch)) {
             $this->root = $schemeMatch[1];
             $this->path = substr($path, strlen($this->root));
             $this->detectSegments($this->path);
@@ -150,8 +150,8 @@ abstract class Base implements Path
      */
     private function detectSegments(string $path)
     {
-        $segments = empty($path) ? [] : explode('/', trim($path, '/'));
-        $segments = array_filter($segments);
+        $segments       = empty($path) ? [] : explode('/', trim($path, '/'));
+        $segments       = array_filter($segments);
         $this->segments = [];
 
         foreach ($segments as $segment) {
@@ -160,12 +160,12 @@ abstract class Base implements Path
             }
             if ($segment === '..') {
                 array_pop($this->segments);
-            } else {
-                $this->segments[] = $segment;
+                continue;
             }
+            $this->segments[] = $segment;
         }
 
-        $this->depth    = count($this->segments);
+        $this->depth = count($this->segments);
     }
 
     /**
